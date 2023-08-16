@@ -1,26 +1,43 @@
+function compare(a, b) {
+  if (a < b) {
+      return -1;
+  } else if (a > b) {
+      return 1;
+  } else {
+      return 0;
+  }
+}
+ 
+ 
+ 
 function calculateMinCost() {
   //your code here
-
-	let arr = [4,2,7,6,9];
-	arr.sort();
-
-	while(arr.size() > 1){
-		let a = arr.shift();
-		let b = arr.shift();
-		let sum = a + b;
-		let pivotIdx = findPivot(arr, sum);
-
-		arr.splice(pivotIdx, 0, sum);
-	}
-	
-  return arr[0];
+  let str=document.getElementById('rope-lengths').value.split(",");
+  let arr=str.map((str)=>parseInt(str));
+  // console.log(arr);
   
+let total=0;
+arr=arr.sort(compare);
+// console.log("arr ",arr);
+while(arr.length>=2){
+  let sum=arr[0]+arr[1];
+  // console.log(sum);
+  let rem=[];
+  rem.push(sum);
+  for(let k=2;k<arr.length;k++){
+    rem.push(arr[k]);
+  }
+  rem=rem.sort(compare);
+  // console.log("rem ",rem);
+  arr=[...rem];
+  // console.log("arr ",arr);
+  total=total+sum;
+  // console.log("total "+total+"----------------------");
 }
-
-function findPivot(arr, num){
-	for(int i = 0; i < arr.length; i++){
-		if(arr[i] > num) return i;
-	}
-
-	return arr.length;
-}
+console.log(total);
+ 
+ 
+let result=document.getElementById('result');
+result.innerHTML=total;
+}  
+  
